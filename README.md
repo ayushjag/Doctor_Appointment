@@ -1,8 +1,6 @@
 
 # 🏥 Doctor Appointment System
 
-![Doctor Appointment System](https://your-banner-image-url.com)
-
 ## 🌟 Overview
 🚀 **Doctor Appointment System** is a full-stack web application that allows patients to book doctor appointments online. It provides role-based access for **Admins, Doctors, and Patients**, making appointment scheduling seamless and efficient.
 
