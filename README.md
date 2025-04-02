@@ -83,21 +83,4 @@ cd frontend && npm run dev
 ## 🙌 Contributing
 We love contributions! Feel free to **Fork** this repo and submit a **Pull Request**. 🚀
 
-## 📜 License
-This project is **MIT Licensed**. Feel free to use and modify.
->>>>>>> 82b88415e7405e9f855fb07f0ff3f6d44c5547b4
 
-app.get('/api/endpoint', (req, res) => {
-    res.json({ message: 'Hello from the backend!' });
-});
-
-<<<<<<< HEAD
-app.listen(3000, () => {
-    console.log('Server is running on port 3000');
-});
-```
-
-This will allow your frontend to make requests to the backend without any CORS issues.
-=======
-🌟 **Give a ⭐ if you like this project!**
->>>>>>> 82b88415e7405e9f855fb07f0ff3f6d44c5547b4
