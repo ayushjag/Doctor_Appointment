@@ -3,34 +3,38 @@ import { assets } from '../assets/assets';
 
 const Header = () => {
     return (
-        <div className='flex flex-col md:flex-row flex-wrap bg-blue-400 rounded-lg px-6 md:px-10 lg:px-20'>
-
-            {/* --------- Header Left --------- */}
-            <div className='md:w-1/2 flex flex-col items-start justify-center gap-4 py-10 m-auto md:py-[10vw] md:mb-[-30px]'>
-                <p className='text-3xl md:text-4xl lg:text-5xl text-white font-semibold leading-tight md:leading-tight lg:leading-tight'>
-                    Book Appointment <br />  With Trusted Doctors
+        <div className='flex flex-col md:flex-row items-center bg-white px-6 md:px-16 lg:px-24 md:py-10'>
+            
+            {/* Left Side */}
+            <div className='md:w-1/2 flex flex-col gap-6'>
+                <p className='text-sm text-blue-900 font-semibold tracking-wide uppercase'>
+                    Hospital Center ----
                 </p>
-                <div className='flex flex-col md:flex-row items-center gap-3 text-white text-sm font-light'>
-                    <img className='w-28' src={assets.group_profiles} alt="" />
-                    <p>Simply browse through our extensive list of trusted doctors, <br className='hidden sm:block' /> schedule your appointment hassle-free.</p>
-                </div>
-                <a href='#speciality' className='flex items-center gap-2 bg-white px-8 py-3 rounded-full text-[#595959] text-sm m-auto md:m-0 hover:scale-105 transition-all duration-300'>
-                    Book appointment <img className='w-3' src={assets.arrow_icon} alt="" />
+                <h1 className='text-4xl md:text-5xl font-extrabold text-blue-900 leading-tight'>
+                    Healthcare for <br /> Family’s Health
+                </h1>
+                <p className='text-gray-500 text-base leading-relaxed'>
+                   We provide comprehensive healthcare services tailored for your family's well-being. Our trusted professionals ensure compassionate care, focused on comfort, convenience, and results.
+                </p>
+                <a
+                    href='#speciality'
+                    className='bg-blue-600 hover:bg-blue-700 transition-all text-white text-sm font-medium px-6 py-4 rounded-md w-fit'
+                >
+                    Book an Appointment
                 </a>
             </div>
 
-            {/* --------- Header Right --------- */}
-            <div className='md:w-1/2 relative min-h-[300px] md:min-h-[400px]'>
-                <img 
-                    className='w-full h-auto md:absolute bottom-0 left-[10%] md:left-[20%] rounded-lg object-cover max-h-[500px]' 
-                    src={assets.header_img} 
-                    alt="Doctor" 
-                    style={{ width: '120%', maxWidth: 'none' }}
+            {/* Right Side */}
+            <div className='md:w-1/2 mt-5 md:mt-0 flex justify-center'>
+                <img
+                    src={assets.header_img}
+                    alt="Doctor"
+                    className='rounded-md w-full max-w-md object-cover'
                 />
             </div>
 
         </div>
-    )
-}
+    );
+};
 
 export default Header;
