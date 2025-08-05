@@ -1,41 +1,80 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { AppContext } from '../context/AppContext'
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
+
 const RelatedDoctors = ({ speciality, docId }) => {
-
-    const navigate = useNavigate()
-    const { doctors } = useContext(AppContext)
-
-    const [relDoc, setRelDoc] = useState([])
+    const navigate = useNavigate();
+    const { doctors } = useContext(AppContext);
+    const [relDoc, setRelDoc] = useState([]);
 
     useEffect(() => {
         if (doctors.length > 0 && speciality) {
-            const doctorsData = doctors.filter((doc) => doc.speciality === speciality && doc._id !== docId)
-            setRelDoc(doctorsData)
+            // Filter for doctors with the same speciality but exclude the current one
+            const relatedDoctorsData = doctors.filter(
+                (doc) => doc.speciality === speciality && doc._id !== docId
+            );
+            setRelDoc(relatedDoctorsData);
         }
-    }, [doctors, speciality, docId])
+    }, [doctors, speciality, docId]);
+
+    // --- Conditional Rendering: Only show the component if there are related doctors ---
+    if (relDoc.length === 0) {
+        return null;
+    }
 
     return (
-        <div className='flex flex-col items-center gap-4 my-16 text-[#262626]'>
-            <h1 className='text-3xl font-medium'>Related Doctors</h1>
-            <p className='sm:w-1/3 text-center text-sm'>Simply browse through our extensive list of trusted doctors.</p>
-            <div className='w-full grid grid-cols-auto gap-4 pt-5 gap-y-6 px-3 sm:px-0'>
-                {relDoc.map((item, index) => (
-                    <div onClick={() => { navigate(`/appointment/${item._id}`); scrollTo(0, 0) }} className='border border-[#C9D8FF] rounded-xl overflow-hidden cursor-pointer hover:translate-y-[-10px] transition-all duration-500' key={index}>
-                        <img className='bg-[#EAEFFF]' src={item.image} alt="" />
-                        <div className='p-4'>
-                            <div className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : "text-gray-500"}`}>
-                                <p className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{item.available ? 'Available' : "Not Available"}</p>
-                            </div>
-                            <p className='text-[#262626] text-lg font-medium'>{item.name}</p>
-                            <p className='text-[#5C5C5C] text-sm'>{item.speciality}</p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-            {/* <button className='bg-[#EAEFFF] text-gray-600 px-12 py-3 rounded-full mt-10'>more</button> */}
-        </div>
-    )
-}
+        <div className='bg-gray-50 py-16'>
+            <div className='container mx-auto px-4'>
+                {/* --- Section Header --- */}
+                <div className='text-center mb-12'>
+                    <h1 className='text-3xl font-bold text-gray-800'>
+                        Related Doctors
+                    </h1>
+                    <p className='text-lg text-gray-600 mt-2'>
+                        Here are other specialists you might be interested in.
+                    </p>
+                </div>
 
-export default RelatedDoctors
+                {/* --- Grid of Related Doctor Cards --- */}
+                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8'>
+                    {relDoc.map((item) => (
+                        <div
+                            onClick={() => {
+                                navigate(`/appointment/${item._id}`);
+                                window.scrollTo(0, 0);
+                            }}
+                            className='bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-2 transition-transform duration-300 ease-in-out cursor-pointer group'
+                            key={item._id}
+                        >
+                            <div className='relative'>
+                                <img
+                                    className='w-full h-56 object-cover'
+                                    src={item.image}
+                                    alt={item.name}
+                                />
+                                <div
+                                    className={`absolute top-3 right-3 flex items-center gap-2 text-xs px-2 py-1 rounded-full ${
+                                        item.available
+                                            ? 'bg-green-100 text-green-800'
+                                            : 'bg-red-100 text-red-800'
+                                    }`}
+                                >
+                                    <span className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : 'bg-red-500'}`}></span>
+                                    {item.available ? 'Available' : 'Not Available'}
+                                </div>
+                            </div>
+                            <div className='p-5'>
+                                <p className='text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300'>
+                                    {item.name}
+                                </p>
+                                <p className='text-md text-gray-600 mt-1'>{item.speciality}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default RelatedDoctors;
